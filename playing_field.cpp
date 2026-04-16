@@ -4,6 +4,7 @@
 #include <chrono>
 #include <cstdlib>
 #include <ncurses.h>
+#include <random>
 #include "playing_field.h"
 
 using namespace std;
@@ -11,8 +12,22 @@ using namespace std;
 playing_field::playing_field(int height, int width) 
     : field_height(height), field_width(width) {
     
-    current.resize(field_height, std::vector<bool>(field_width, false));
-    next.resize(field_height, std::vector<bool>(field_width, false));
+    current.assign(field_height, std::vector<cell>(field_width));
+    next.assign(field_height, std::vector<cell>(field_width));
+}
+
+void playing_field::set_cells() {
+    random_device cells_random;
+    mt19937 gen(cells_random());
+    bernoulli_distribution chance(0.01);
+
+    for(int y = 0; y < field_height; y++) {
+        for(int x = 0; x < field_width; x++) {
+            current[y][x].setAlive(chance(gen));
+            char symbol = current[y][x].getSymbol();
+            mvaddch(y + 1, x + 1, symbol);
+        }
+    }
 }
 
 void playing_field::display() {
@@ -34,6 +49,8 @@ void playing_field::display() {
         mvaddch(y, field_width + 1, '|');
 
     }
+
+    set_cells();
     
     refresh();
 }

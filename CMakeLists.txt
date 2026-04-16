@@ -13,7 +13,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Find ncurses library
 find_package(Curses REQUIRED)
 
-# Project sources (только ваши .cpp файлы)
+# Project sources
 set(PROJECT_SOURCES
     main.cpp
     playing_field.cpp
