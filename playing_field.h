@@ -11,12 +11,16 @@ private:
     std::vector<std::vector<cell>> current;
     std::vector<std::vector<cell>> next;
 
-    void set_cells();
+    // void random_draw_cells();
+    void draw_frame();
+    void draw_cells();
 
 public:
     playing_field(int height, int width);
     void check_status_cell();
     void display();
+    void random_draw_cells();
+    void set_cell(int cell_y, int cell_x);
 };
 
 #endif

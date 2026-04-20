@@ -17,6 +17,7 @@ find_package(Curses REQUIRED)
 set(PROJECT_SOURCES
     main.cpp
     playing_field.cpp
+    manual_control.cpp
 )
 
 # Create executable
