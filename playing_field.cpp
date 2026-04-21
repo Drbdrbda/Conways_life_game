@@ -55,8 +55,7 @@ void playing_field::random_draw_cells() {
 void playing_field::set_cell(int cell_y, int cell_x) {
     if (cell_y >= 0 && cell_y < field_height && cell_x >= 0 && cell_x < field_width) {
         current[cell_y][cell_x].setAlive(true);
-
-        refresh();
+        //mvaddch(cell_y + 1, cell_x + 1, current[cell_y][cell_x].getSymbol());
     }
 }
 
@@ -71,7 +70,7 @@ void playing_field::draw_cells() {
 }
 
 void playing_field::display() {
-    clear();
+    //clear();
 
     draw_frame();
     draw_cells();

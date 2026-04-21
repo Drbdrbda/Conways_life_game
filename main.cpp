@@ -31,6 +31,7 @@ int main() {
     while((symbol_input = getch()) != 'q') {
         manual_control control_input;
         control_input.handle_input(game, symbol_input);
+
         game.display();                
     }
 
