@@ -27,7 +27,7 @@ void  manual_control::handle_input(playing_field& field, int symbol_input){
                     int cell_y = event.y - 1;
                     int cell_x = event.x - 1;
 
-                    field.set_cell(cell_y, cell_x);
+                    field.change_cell_status(cell_y, cell_x);
 
                 }
             }

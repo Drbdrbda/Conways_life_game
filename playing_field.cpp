@@ -45,18 +45,23 @@ void playing_field::random_draw_cells() {
 
     for(int y = 0; y < field_height; y++) {
         for(int x = 0; x < field_width; x++) {
-            current[y][x].setAlive(chance(gen));
+            current[y][x].setCellStatus(chance(gen));
             char symbol = current[y][x].getSymbol();
             mvaddch(y + 1, x + 1, symbol);
         }
     }
 }
 
-void playing_field::set_cell(int cell_y, int cell_x) {
+void playing_field::change_cell_status(int cell_y, int cell_x) {
+    bool status = current[cell_y][cell_x].getCellStatus();
     if (cell_y >= 0 && cell_y < field_height && cell_x >= 0 && cell_x < field_width) {
-        current[cell_y][cell_x].setAlive(true);
-        //mvaddch(cell_y + 1, cell_x + 1, current[cell_y][cell_x].getSymbol());
-    }
+        if (status == true) {
+            current[cell_y][cell_x].setCellStatus(false);
+        } else {
+            current[cell_y][cell_x].setCellStatus(true);
+        }
+
+     }
 }
 
 void playing_field::draw_cells() {

@@ -21,6 +21,7 @@ public:
     void display();
     void random_draw_cells();
     void set_cell(int cell_y, int cell_x);
+    void change_cell_status(int cell_y, int cell_x);
 };
 
 #endif
