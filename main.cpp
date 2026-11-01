@@ -18,6 +18,7 @@ int main() {
     mousemask(ALL_MOUSE_EVENTS, NULL);
     mouseinterval(0);  
     keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
 
     getmaxyx(stdscr, max_y_window, max_x_window);
 
@@ -26,13 +27,28 @@ int main() {
     game.random_draw_cells();
     game.display();
 
-    int symbol_input;
+    bool paused = false;
 
-    while((symbol_input = getch()) != 'q') {
+    while(true) {
+        int input_key = getch();
         manual_control control_input;
-        control_input.handle_input(game, symbol_input);
 
-        game.display();                
+        if (input_key == 'q') {
+            break;
+        }
+
+        if (input_key == ' ') {
+            paused = !paused;
+        }
+
+        if (input_key != ERR) {
+            control_input.handle_input(game, input_key);
+        }
+
+        if (!paused) game.update();
+        game.display();
+        
+        napms(100);
     }
 
     endwin();
